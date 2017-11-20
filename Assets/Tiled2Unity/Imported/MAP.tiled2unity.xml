@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!--Tiled2Unity generated xml data-->
+<!--Do not modify by hand-->
+<!--Last exported: 08/11/2017 22:41:19-->
+<Tiled2Unity version="1.0.13.0">
+  <Prefab name="MAP" orientation="Orthogonal" staggerAxis="Y" staggerIndex="Odd" hexSideLength="0" numLayers="1" numTilesWide="100" numTilesHigh="100" tileWidth="1024" tileHeight="1024" exportScale="1" mapWidthInPixels="102400" mapHeightInPixels="102400" backgroundColor="#808080">
+    <GameObject name="Calque de Tile 1" x="0" y="0" z="0">
+      <TileLayer offsetX="0" offsetY="0" />
+    </GameObject>
+  </Prefab>
+</Tiled2Unity>
