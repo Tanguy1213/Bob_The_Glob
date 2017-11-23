@@ -4,77 +4,37 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
-
-
+    [Header("Player")]
     [SerializeField]
-    public int EnemyLife = 10;
+    GameObject player;
     [SerializeField]
-    private Text enemyTextLifes;
-    private const string ENEMY_TEXT_LIFES = "Enemy's lifes : ";
-
+    public int PlayerDamages;
     [SerializeField]
-    private int PlayerLife = 10;
+    private int PlayerLife;
     [SerializeField]
     private Text textLifes;
     private const string TEXT_LIFES = ": ";
 
-    private int damages = 1;
-
+    private EnemyController enemyController;
     // Use this for initialization
-    void Start ()
+    void Start()
     {
+        enemyController = FindObjectOfType<EnemyController>();
         textLifes.text = TEXT_LIFES + PlayerLife;
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
-    public void EnemyTakeDammage()
+    // Update is called once per frame
+    void Update()
     {
-        EnemyLife -= damages;
-        if (EnemyLife <= 0)
-        {
-          
-        }
-        else
-        {
-            //enemyTextLifes.text = ENEMY_TEXT_LIFES + EnemyLife;
-        }
+
     }
 
     public void TakeDamage()
     {
-        PlayerLife -= damages;
-        if (PlayerLife <= 0)
-        {
-            SceneManager.LoadScene("GameOver");
-        }
-        else
-        {
-            textLifes.text = TEXT_LIFES + PlayerLife;
-        }
-    }
-
-    public void EnemyDie()
-    {
-        EnemyLife--;
-        if (EnemyLife <= 0)
-        {
-           
-        }
-        else
-        {
-            enemyTextLifes.text = ENEMY_TEXT_LIFES + EnemyLife;
-        }
-    }
-
-    public void PlayerDie()
-    {
-        PlayerLife--;
+        PlayerLife -= enemyController.EnemyDamages;
         if (PlayerLife <= 0)
         {
             SceneManager.LoadScene("GameOver");
@@ -90,5 +50,11 @@ public class GameManager : MonoBehaviour {
         PlayerLife++;
         textLifes.text = TEXT_LIFES + PlayerLife;
     }
+
+    public void AddAttack()
+    {
+        PlayerDamages++;
+    }
+
 }
 

@@ -9,6 +9,16 @@ TagManager:
   - PlayerBullet
   - Lifes
   - EnemyBullet
+  - Key1
+  - Door1
+  - AttackBoost
+  - Enemy1
+  - Enemy2
+  - Range
+  - Enemy
+  - Key2
+  - Door2
+  - AttackBoost2
   layers:
   - Default
   - TransparentFX

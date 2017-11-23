@@ -2,22 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletManager : MonoBehaviour {
+public class BulletManager : MonoBehaviour
+{
 
-    
-    GameManager gameManager;
 
     // Use this for initialization
-    void Start () {
-
-        gameManager = FindObjectOfType<GameManager>();
+    void Start()
+    {
 
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     private void OnBecameInvisible()
     {
@@ -34,6 +33,7 @@ public class BulletManager : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+
 
     }
 

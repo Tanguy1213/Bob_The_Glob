@@ -8,15 +8,15 @@ public class SightController : MonoBehaviour
 
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
     }
-    
+
 
     // Update is called once per frame
     void Update()
     {
-        
+
         posMouse.z = 0;
         gameObject.transform.position = posMouse;
         posMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);

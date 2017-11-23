@@ -13,9 +13,9 @@ public class LoadOnClick : MonoBehaviour
     {
         Application.Quit();
     }
-   public void LoadSignPost(string SignPost)
+    public void LoadSignPost(string SignPost)
     {
         SceneManager.LoadScene(SignPost);
-        
+
     }
 }
