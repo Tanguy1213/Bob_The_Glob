@@ -11,6 +11,9 @@ public class LoadOnClick : MonoBehaviour
    [SerializeField]
     private GameObject PauseCanvas;
 
+    [SerializeField]
+    private GameObject Player;
+
     private bool IsPauseActive = false;
 
     private void Start()
@@ -40,6 +43,7 @@ public class LoadOnClick : MonoBehaviour
     public void ResumeButton()
     {
         IsPauseActive = !IsPauseActive;
+        
     }
 
     private void Update()
@@ -47,6 +51,7 @@ public class LoadOnClick : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             ResumeButton();
+            
         }
 
         if(IsPauseActive == true)
@@ -54,12 +59,14 @@ public class LoadOnClick : MonoBehaviour
             Time.timeScale = 0.0f;
             PauseCanvas.SetActive(true);
             Cursor.visible = true;
+            Player.SetActive(false);
         }
 
         else
         {
             Time.timeScale = 1.0f;
             PauseCanvas.SetActive(false);
+            Player.SetActive(true);
         }
     }
 }
