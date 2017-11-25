@@ -8,6 +8,15 @@ public class LoadOnClick : MonoBehaviour
     [SerializeField]
     private GameObject SignPost;
 
+   [SerializeField]
+    private GameObject PauseCanvas;
+
+    private bool IsPauseActive = false;
+
+    private void Start()
+    {
+        
+    }
     public void LoadFirstLevel(string FirstLevel)
     {
         SceneManager.LoadScene(FirstLevel);
@@ -22,8 +31,35 @@ public class LoadOnClick : MonoBehaviour
     {
         SignPost.SetActive(true);
     }
+
     public void CloseSignPost()
     {
         SignPost.SetActive(false);
+    }
+
+    public void ResumeButton()
+    {
+        IsPauseActive = !IsPauseActive;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            ResumeButton();
+        }
+
+        if(IsPauseActive == true)
+        {
+            Time.timeScale = 0.0f;
+            PauseCanvas.SetActive(true);
+            Cursor.visible = true;
+        }
+
+        else
+        {
+            Time.timeScale = 1.0f;
+            PauseCanvas.SetActive(false);
+        }
     }
 }

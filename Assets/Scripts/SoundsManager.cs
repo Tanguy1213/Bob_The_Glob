@@ -21,7 +21,11 @@ public class SoundsManager : MonoBehaviour
     [SerializeField]
     private AudioClip EnemyShoot;
 
- 
+    [Header("WinSound")]
+    [SerializeField]
+    private AudioClip WinSound;
+
+
 
     // Use this for initialization
     void Start()
@@ -49,7 +53,7 @@ public class SoundsManager : MonoBehaviour
     {
         AudioSource.clip = EnemyShoot;
         AudioSource.volume = 0.1f;
-        AudioSource.Play();       
+        AudioSource.Play();
     }
 
     public void PlayBoostSound()
@@ -63,6 +67,13 @@ public class SoundsManager : MonoBehaviour
     {
         AudioSource.clip = PickUpLife;
         AudioSource.volume = 10;
+        AudioSource.Play();
+    }
+
+    public void PlayWinSound()
+    {
+        AudioSource.clip = WinSound;
+        AudioSource.volume = 1;
         AudioSource.Play();
     }
 }

@@ -43,6 +43,8 @@ public class BossManager : MonoBehaviour
     [Header("Sounds")]
     [SerializeField]
     private SoundsManager SoundsManager;
+    [SerializeField]
+    private GameObject WinSound;
 
 
     // Use this for initialization
@@ -112,7 +114,7 @@ public class BossManager : MonoBehaviour
 
             if(PlayerInRange == true)
             {
-                DoorToClose.SetActive(true);
+                DoorToClose.SetActive(true);               
                 BossHealthBar.SetActive(true);
             }
         }
@@ -127,5 +129,6 @@ public class BossManager : MonoBehaviour
     {
         Destroy(gameObject, TimeToDestroyBoss);
         BossHealthBar.SetActive(false);
+        WinSound.SetActive(true);
     }
 }

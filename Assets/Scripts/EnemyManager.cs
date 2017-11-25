@@ -81,7 +81,7 @@ public class EnemyManager : MonoBehaviour
                 EnemyAnimationController.SetTrigger("CancelHurtAnimation");
                 EnemyTakeDamages();
                 Destroy(collision.gameObject);
-                DoorToClose.SetActive(true);
+                DoorToClose.SetActive(true);               
 
                 if (EnemyLife <= 0)
                 {

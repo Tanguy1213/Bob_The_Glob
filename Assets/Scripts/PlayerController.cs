@@ -18,8 +18,7 @@ public class PlayerController : MonoBehaviour
     GameObject AttackBoost1Canvas;
     [SerializeField]
     GameObject Door1;
-
-
+    [Space]
     [SerializeField]
     GameObject Key2Canvas;
     [SerializeField]
@@ -133,6 +132,7 @@ public class PlayerController : MonoBehaviour
         
         if(collision.tag == "BossAggroZone")
         {
+            SoundsManager.PlayDoorSound();
             BossManager.PlayerInRange = true;
         }
     }
@@ -171,5 +171,4 @@ public class PlayerController : MonoBehaviour
     {
         return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
     }
-
 }

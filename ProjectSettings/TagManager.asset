@@ -5,23 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - Wall
-  - Doors
   - PlayerBullet
   - Lifes
   - EnemyBullet
   - Key1
-  - Door1
   - AttackBoost
-  - Enemy1
-  - Enemy2
-  - Range
   - Enemy
   - Key2
-  - Door2
   - AttackBoost2
   - BossAggroZone
-  - Enemy1AggroZone
-  - Enemy2AggroZone
   layers:
   - Default
   - TransparentFX
