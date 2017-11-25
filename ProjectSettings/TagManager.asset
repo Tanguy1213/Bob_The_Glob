@@ -19,6 +19,9 @@ TagManager:
   - Key2
   - Door2
   - AttackBoost2
+  - BossAggroZone
+  - Enemy1AggroZone
+  - Enemy2AggroZone
   layers:
   - Default
   - TransparentFX

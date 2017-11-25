@@ -4,22 +4,19 @@ using UnityEngine;
 
 public class SightController : MonoBehaviour
 {
-    Vector3 posMouse;
-
+    Vector3 PosMouse;
 
     // Use this for initialization
     void Start()
     {
     }
 
-
     // Update is called once per frame
     void Update()
     {
-
-        posMouse.z = 0;
-        gameObject.transform.position = posMouse;
-        posMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        PosMouse.z = 0;
+        gameObject.transform.position = PosMouse;
+        PosMouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);    //Check the input mouse position each frame to store it in the variable
         Cursor.visible = false;
     }
 }

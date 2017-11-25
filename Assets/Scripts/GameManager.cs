@@ -9,52 +9,54 @@ public class GameManager : MonoBehaviour
 
     [Header("Player")]
     [SerializeField]
-    GameObject player;
+    GameObject Player;
     [SerializeField]
     public int PlayerDamages;
     [SerializeField]
     private int PlayerLife;
     [SerializeField]
-    private Text textLifes;
+    private Text TextLifes;
     private const string TEXT_LIFES = ": ";
 
-    private EnemyController enemyController;
+    [SerializeField]
+    public GameObject BrainSpeaking;
+
+    private EnemyManager EnemyManager;
+
     // Use this for initialization
     void Start()
     {
-        enemyController = FindObjectOfType<EnemyController>();
-        textLifes.text = TEXT_LIFES + PlayerLife;
+        EnemyManager = FindObjectOfType<EnemyManager>();
+        TextLifes.text = TEXT_LIFES + PlayerLife;
     }
 
     // Update is called once per frame
     void Update()
     {
-
     }
 
     public void TakeDamage()
     {
-        PlayerLife -= enemyController.EnemyDamages;
+        PlayerLife -= EnemyManager.EnemyDamages;
         if (PlayerLife <= 0)
         {
             SceneManager.LoadScene("GameOver");
         }
         else
         {
-            textLifes.text = TEXT_LIFES + PlayerLife;
+            TextLifes.text = TEXT_LIFES + PlayerLife;
         }
     }
 
     public void AddHealth()
     {
         PlayerLife++;
-        textLifes.text = TEXT_LIFES + PlayerLife;
+        TextLifes.text = TEXT_LIFES + PlayerLife;
     }
 
     public void AddAttack()
     {
         PlayerDamages++;
     }
-
 }
 

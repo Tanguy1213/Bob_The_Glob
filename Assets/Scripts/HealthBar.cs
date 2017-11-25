@@ -13,21 +13,20 @@ public class HealthBar : MonoBehaviour
     [SerializeField]
     private Image LifeBar;
 
-    private EnemyController enemyController;
+    private EnemyManager EnemyManager;
 
 
     private void Start()
     {
-        enemyController = GetComponent<EnemyController>();
+        EnemyManager = GetComponent<EnemyManager>();
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        CurrentHP = enemyController.EnemyLife;
+        CurrentHP = EnemyManager.EnemyLife;
         PercentOfHP = CurrentHP / MaxHP;
         LifeBar.fillAmount = PercentOfHP;
     }
-
 }

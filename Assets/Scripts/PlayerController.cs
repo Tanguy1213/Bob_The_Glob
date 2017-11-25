@@ -11,12 +11,14 @@ public class PlayerController : MonoBehaviour
 
     private bool GoingRight = true;
 
+    [Header("Environement interraction")]
     [SerializeField]
     GameObject Key1Canvas;
     [SerializeField]
     GameObject AttackBoost1Canvas;
     [SerializeField]
     GameObject Door1;
+
 
     [SerializeField]
     GameObject Key2Canvas;
@@ -25,32 +27,33 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     GameObject Door2;
 
-
     [Header("Fire gun")]
     [SerializeField]
-    private GameObject bulletPrefab;
+    private GameObject BulletPrefab;
     [SerializeField]
-    private Transform gunTransform;
+    private Transform GunTransform;
     [SerializeField]
-    private float forcebulletVelocity = 0.01f;
+    private float ForcebulletVelocity = 0.01f;
     [SerializeField]
-    private float timeToFire = 2;
-    private float lastTimeFire = 0;
+    private float TimeToFire = 2;
+    private float LastTimeFire = 0;
+    private int TimeToDestroyBullet = 5;
 
     [Header("Sounds")]
     [SerializeField]
     private SoundsManager SoundsManager;
+    
 
-
-    private GameManager gameManager;
-
+    private GameManager GameManager;
+    private EnemyManager EnemyController;
+    private BossManager BossManager;
 
     // Use this for initialization
     void Start()
     {
+        BossManager = FindObjectOfType<BossManager>();
         PlayerAnimationController = GetComponent<Animator>();
-        gameManager = FindObjectOfType<GameManager>();
-
+        GameManager = FindObjectOfType<GameManager>();
     }
 
     // Update is called once per frame
@@ -68,6 +71,7 @@ public class PlayerController : MonoBehaviour
         {
             SwitchDirection();
         }
+
         if (Input.GetAxis("Horizontal") < 0 && GoingRight)
         {
             SwitchDirection();
@@ -84,44 +88,55 @@ public class PlayerController : MonoBehaviour
 
         if (collision.tag == "Lifes")
         {
-            gameManager.AddHealth();
+            SoundsManager.PlayLifeSound();
+            GameManager.AddHealth();
             Destroy(collision.gameObject);
         }
+
         if (collision.tag == "Key1")
         {
-            Destroy(collision.gameObject);
-            Key1Canvas.SetActive(true);
             SoundsManager.PlayDoorSound();
+            Destroy(collision.gameObject);
+            Key1Canvas.SetActive(true);    
             Destroy(Door1);
         }
+
         if (collision.tag == "Key2")
         {
-            Destroy(collision.gameObject);
-            Key2Canvas.SetActive(true);
             SoundsManager.PlayDoorSound();
+            Destroy(collision.gameObject);
+            Key2Canvas.SetActive(true);            
             Destroy(Door2);
         }
+
         if (collision.tag == "EnemyBullet")
         {
-            gameManager.TakeDamage();
+            GameManager.TakeDamage();
             Destroy(collision.gameObject);
         }
 
         if (collision.tag == "AttackBoost")
         {
-            gameManager.AddAttack();
+            SoundsManager.PlayBoostSound();
+            GameManager.AddAttack();
             AttackBoost1Canvas.SetActive(true);
             Destroy(collision.gameObject);
         }
+
         if (collision.tag == "AttackBoost2")
         {
-            gameManager.AddAttack();
+            SoundsManager.PlayBoostSound();
+            GameManager.AddAttack();
             AttackBoost2Canvas.SetActive(true);
             Destroy(collision.gameObject);
         }
-
+        
+        if(collision.tag == "BossAggroZone")
+        {
+            BossManager.PlayerInRange = true;
+        }
     }
-
+    
     void SwitchDirection()
     {
         GoingRight = !GoingRight;
@@ -132,26 +147,24 @@ public class PlayerController : MonoBehaviour
 
     private void Fire()
     {
-        if (Time.realtimeSinceStartup - lastTimeFire > timeToFire)
+        if (Time.realtimeSinceStartup - LastTimeFire > TimeToFire)
         {
-
-            GameObject bullet = Instantiate(bulletPrefab, gunTransform.position, gunTransform.rotation);
-            bullet.GetComponent<Rigidbody2D>().velocity = gunTransform.right * forcebulletVelocity;
-            Destroy(bullet, 5);
-            lastTimeFire = Time.realtimeSinceStartup;
+            GameObject bullet = Instantiate(BulletPrefab, GunTransform.position, GunTransform.rotation);
+            bullet.GetComponent<Rigidbody2D>().velocity = GunTransform.right * ForcebulletVelocity;
+            Destroy(bullet, TimeToDestroyBullet);
+            LastTimeFire = Time.realtimeSinceStartup;
             SoundsManager.PlayShootSound();
-
         }
     }
+
     private void GunFollowMouse()
     {
         Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 diff = (mouse - gunTransform.position);
+        Vector3 diff = (mouse - GunTransform.position);
 
         float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
 
-        gunTransform.rotation = Quaternion.Euler(0f, 0f, angle);
-        
+        GunTransform.rotation = Quaternion.Euler(0f, 0f, angle);       
     }
 
     float AngleBetweenTwoPoints(Vector3 a, Vector3 b)
