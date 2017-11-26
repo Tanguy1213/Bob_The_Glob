@@ -73,6 +73,7 @@ public class SoundsManager : MonoBehaviour
     public void PlayWinSound()
     {
         AudioSource.clip = WinSound;
+        AudioSource.volume = 0.8f;
         AudioSource.Play();
     }
 }
