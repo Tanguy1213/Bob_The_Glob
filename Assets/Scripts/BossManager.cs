@@ -25,7 +25,7 @@ public class BossManager : MonoBehaviour
     
     public bool PlayerInRange = false;
    
-    private float TimeToDestroyBoss = 10.0f;
+    private float TimeToDestroyBoss = 4.0f;
 
     [Header("Guns")]
     [SerializeField]

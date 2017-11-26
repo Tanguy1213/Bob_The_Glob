@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
+    [Header("Player")]
+    [SerializeField]
+    private Sprite[] SpritesDirection;
     [SerializeField]
     public float Speed = 5.0f;
-    private Animator PlayerAnimationController;
-
-    private bool GoingRight = true;
 
     [Header("Environement interraction")]
     [SerializeField]
@@ -46,13 +46,15 @@ public class PlayerController : MonoBehaviour
     private GameManager GameManager;
     private EnemyManager EnemyController;
     private BossManager BossManager;
+    private SpriteRenderer SpriteRenderer;
 
     // Use this for initialization
     void Start()
     {
+        SpriteRenderer = GetComponent<SpriteRenderer>();
         BossManager = FindObjectOfType<BossManager>();
-        PlayerAnimationController = GetComponent<Animator>();
         GameManager = FindObjectOfType<GameManager>();
+
     }
 
     // Update is called once per frame
@@ -60,26 +62,33 @@ public class PlayerController : MonoBehaviour
     {
         GunFollowMouse();
 
-        PlayerAnimationController.SetFloat("SpeedY", Mathf.Abs(Input.GetAxis("Vertical")));
-        PlayerAnimationController.SetFloat("SpeedX", Mathf.Abs(Input.GetAxis("Horizontal")));
-
         transform.Translate(Vector2.right * Input.GetAxis("Horizontal") * Speed * Time.deltaTime);
         transform.Translate(Vector2.up * Input.GetAxis("Vertical") * Speed * Time.deltaTime);
 
-        if (Input.GetAxis("Horizontal") > 0 && !GoingRight)
+        if (Input.GetAxis("Horizontal") > 0)
         {
-            SwitchDirection();
+            SpriteRenderer.sprite = SpritesDirection[0];
         }
 
-        if (Input.GetAxis("Horizontal") < 0 && GoingRight)
+        if (Input.GetAxis("Horizontal") < 0)
         {
-            SwitchDirection();
+            SpriteRenderer.sprite = SpritesDirection[1];
+        }
+
+        if (Input.GetAxis("Vertical") > 0)
+        {
+            SpriteRenderer.sprite = SpritesDirection[3];
+        }
+
+        if (Input.GetAxis("Vertical") < 0)
+        {
+            SpriteRenderer.sprite = SpritesDirection[2];
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Fire();
-        }
+        }        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -137,14 +146,6 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    void SwitchDirection()
-    {
-        GoingRight = !GoingRight;
-        Vector2 thescale = transform.localScale;
-        thescale.x *= -1;
-        transform.localScale = thescale;
-    }
-
     private void Fire()
     {
         if (Time.realtimeSinceStartup - LastTimeFire > TimeToFire)
