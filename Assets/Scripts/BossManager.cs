@@ -20,12 +20,15 @@ public class BossManager : MonoBehaviour
     private Animator BossAnimationController;
     [SerializeField]
     private GameObject DoorToClose;
+    private SpriteRenderer  BossSpriteRenderer;
 
-    private bool BossIsAlive = true;
-    
-    public bool PlayerInRange = false;
-   
+    private bool BossIsAlive = true;   
+    public bool PlayerInRange = false;   
     private float TimeToDestroyBoss = 4.0f;
+
+    private bool isBlinking = false;
+    private float BlinkingLoopTime = 0.1f;
+    private float TimeToBlink = 0.5f;
 
     [Header("Guns")]
     [SerializeField]
@@ -52,6 +55,7 @@ public class BossManager : MonoBehaviour
     {
         gameManager = FindObjectOfType<GameManager>();
         BossAnimationController = GetComponent<Animator>();
+        BossSpriteRenderer = GetComponent<SpriteRenderer>();
         StartCoroutine(Fire());
     }
 
@@ -66,8 +70,7 @@ public class BossManager : MonoBehaviour
         if (collision.tag == "PlayerBullet" && BossIsAlive == true) //Check collision between the boss and player's bullets
         {
             BossAnimationController.SetBool("isShooting", false);
-            BossAnimationController.SetTrigger("CancelHurtAnimation");
-            BossTakeDamages();
+            StartCoroutine(BossTakeDamages());
             Destroy(collision.gameObject);
 
             if (BossLife <= 0)
@@ -120,9 +123,27 @@ public class BossManager : MonoBehaviour
         }
     }
 
-    public void BossTakeDamages()
+    private IEnumerator BossTakeDamages()
     {
         BossLife -= gameManager.PlayerDamages;
+        if (isBlinking == false)
+        {
+            isBlinking = true;
+            StartCoroutine(Blinking());
+            yield return new WaitForSeconds(TimeToBlink);
+            isBlinking = false;
+        }
+    }
+
+    private IEnumerator Blinking()
+    {
+        while (isBlinking)
+        {
+            BossSpriteRenderer.enabled = false;
+            yield return new WaitForSeconds(BlinkingLoopTime);
+            BossSpriteRenderer.enabled = true;
+            yield return new WaitForSeconds(BlinkingLoopTime);
+        }
     }
 
     public void BossDie()

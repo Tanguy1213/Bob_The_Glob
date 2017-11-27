@@ -17,13 +17,18 @@ public class EnemyManager : MonoBehaviour
     private Animator EnemyAnimationController;
     [SerializeField]
     private GameObject DoorToClose;
+    private SpriteRenderer EnemySpriteRenderer;
+
+    private bool isBlinking = false;
+    private float BlinkingLoopTime = 0.1f;
+    private float TimeToBlink = 0.5f;
 
     float TheScale;
     Vector2 Direction;
 
     private bool CanAttack = false;
 
-    
+
 
     [Header("Gun")]
     [SerializeField]
@@ -57,6 +62,7 @@ public class EnemyManager : MonoBehaviour
     {
         GameManager = FindObjectOfType<GameManager>();
         EnemyAnimationController = GetComponent<Animator>();
+        EnemySpriteRenderer = GetComponent<SpriteRenderer>();
         StartCoroutine(Fire());
         TheScale = transform.localScale.x;
     }
@@ -71,7 +77,6 @@ public class EnemyManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
         if (gameObject.tag == "Enemy")
         {
             if (collision.tag == "PlayerBullet")
@@ -79,9 +84,9 @@ public class EnemyManager : MonoBehaviour
                 CanAttack = true;
                 EnemyAnimationController.SetBool("isShooting", false);
                 EnemyAnimationController.SetTrigger("CancelHurtAnimation");
-                EnemyTakeDamages();
+                StartCoroutine(EnemyTakeDamages());
                 Destroy(collision.gameObject);
-                DoorToClose.SetActive(true);               
+                DoorToClose.SetActive(true);
 
                 if (EnemyLife <= 0)
                 {
@@ -95,9 +100,16 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    public void EnemyTakeDamages()
+    private IEnumerator EnemyTakeDamages()
     {
         EnemyLife -= GameManager.PlayerDamages;
+        if (isBlinking == false)
+        {
+            isBlinking = true;
+            StartCoroutine(Blinking());
+            yield return new WaitForSeconds(TimeToBlink);
+            isBlinking = false;
+        }
     }
 
     public void EnemyDie()
@@ -109,11 +121,10 @@ public class EnemyManager : MonoBehaviour
 
     private IEnumerator Fire()
     {
-
         while (true)
-        {         
+        {
             yield return new WaitForSeconds(TimeToFire);
-            
+
             if (CanAttack == true)
             {
                 EnemyAnimationController.SetBool("isShooting", true);
@@ -125,6 +136,18 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    private IEnumerator Blinking()
+    {
+        while (isBlinking)
+        {
+            EnemySpriteRenderer.enabled = false;
+            yield return new WaitForSeconds(BlinkingLoopTime);
+            EnemySpriteRenderer.enabled = true;
+            yield return new WaitForSeconds(BlinkingLoopTime);
+        }
+    }
+
+
     private void EnemyDirection() //Check if the target is on right or on left to face it
     {
         if (Target.transform.position.x > transform.position.x)
@@ -135,7 +158,5 @@ public class EnemyManager : MonoBehaviour
         {
             transform.localScale = new Vector2(TheScale, transform.localScale.y);
         }
-
     }
-
 }
