@@ -5782,7 +5782,6 @@ GameObject:
   - component: {fileID: 535045466}
   - component: {fileID: 535045465}
   - component: {fileID: 535045463}
-  - component: {fileID: 535045461}
   - component: {fileID: 535045462}
   m_Layer: 0
   m_Name: Player
@@ -5791,26 +5790,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!50 &535045461
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 535045460}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!58 &535045462
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7211,7 +7190,7 @@ MonoBehaviour:
   TimeToFire: 0.8
   BulletPrefab: {fileID: 1350425866748674, guid: 29b9a8a711d38de44927c59051fcc2ae,
     type: 2}
-  BulletVelocity: 10
+  BulletVelocity: 9
   Target: {fileID: 535045460}
   Drop1: {fileID: 34313895}
   Drop2: {fileID: 855471392}
@@ -14040,7 +14019,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 977b536dfa848e947905d8f5e2b079bc, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.4
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
