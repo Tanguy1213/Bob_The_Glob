@@ -5,16 +5,13 @@ using UnityEngine;
 public class BulletManager : MonoBehaviour
 {
 
-
     // Use this for initialization
     void Start()
-    {
-    }
+    { }
 
     // Update is called once per frame
     void Update()
-    {
-    }
+    { }
 
     private void OnBecameInvisible() //If the gameobject goes out of the screen the function destroy it
     {

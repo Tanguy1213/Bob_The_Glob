@@ -8,7 +8,7 @@ public class LoadOnClick : MonoBehaviour
     [SerializeField]
     private GameObject SignPost;
 
-   [SerializeField]
+    [SerializeField]
     private GameObject PauseCanvas;
 
     [SerializeField]
@@ -17,9 +17,8 @@ public class LoadOnClick : MonoBehaviour
     private bool IsPauseActive = false;
 
     private void Start()
-    {
-        
-    }
+    { }
+
     public void LoadFirstLevel(string FirstLevel)
     {
         SceneManager.LoadScene(FirstLevel);
@@ -43,18 +42,17 @@ public class LoadOnClick : MonoBehaviour
     public void ResumeButton()
     {
         IsPauseActive = !IsPauseActive;
-        
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             ResumeButton();
-            
+
         }
 
-        if(IsPauseActive == true)
+        if (IsPauseActive == true)
         {
             Time.timeScale = 0.0f;
             PauseCanvas.SetActive(true);

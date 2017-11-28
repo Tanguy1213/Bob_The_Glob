@@ -29,7 +29,6 @@ public class EnemyManager : MonoBehaviour
     private bool CanAttack = false;
 
 
-
     [Header("Gun")]
     [SerializeField]
     private Transform GunTransform;
@@ -73,7 +72,6 @@ public class EnemyManager : MonoBehaviour
         EnemyDirection();
         Direction = (Target.transform.position - transform.position).normalized;
     }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -146,7 +144,6 @@ public class EnemyManager : MonoBehaviour
             yield return new WaitForSeconds(BlinkingLoopTime);
         }
     }
-
 
     private void EnemyDirection() //Check if the target is on right or on left to face it
     {

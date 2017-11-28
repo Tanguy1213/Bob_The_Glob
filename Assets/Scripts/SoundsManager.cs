@@ -16,15 +16,17 @@ public class SoundsManager : MonoBehaviour
     private AudioClip PickUpBoost;
     [SerializeField]
     private AudioClip PickUpLife;
+    private const float MaxSoundVolume = 1.0f;
 
     [Header("EnemySounds")]
     [SerializeField]
     private AudioClip EnemyShoot;
+    private const float EnemyShootSoundVolume = 0.1f;
 
     [Header("WinSound")]
     [SerializeField]
     private AudioClip WinSound;
-
+    private const float WinSoundVolume = 0.8f;
 
 
     // Use this for initialization
@@ -38,42 +40,42 @@ public class SoundsManager : MonoBehaviour
     {
         int indexSoundRandom = Random.Range(0, PlayerShootSounds.Length); //Use to play randomly a sound
         AudioSource.clip = PlayerShootSounds[indexSoundRandom];
-        AudioSource.volume = 1;
+        AudioSource.volume = MaxSoundVolume;
         AudioSource.Play();
     }
 
     public void PlayDoorSound()
     {
         AudioSource.clip = PickUpKeySound;
-        AudioSource.volume = 1;
+        AudioSource.volume = MaxSoundVolume;
         AudioSource.Play();
     }
 
     public void PlayEnemyShootSound()
     {
         AudioSource.clip = EnemyShoot;
-        AudioSource.volume = 0.1f;
+        AudioSource.volume = EnemyShootSoundVolume;
         AudioSource.Play();
     }
 
     public void PlayBoostSound()
     {
         AudioSource.clip = PickUpBoost;
-        AudioSource.volume = 1;
+        AudioSource.volume = MaxSoundVolume;
         AudioSource.Play();
     }
 
     public void PlayLifeSound()
     {
         AudioSource.clip = PickUpLife;
-        AudioSource.volume = 10;
+        AudioSource.volume = MaxSoundVolume;
         AudioSource.Play();
     }
 
     public void PlayWinSound()
     {
         AudioSource.clip = WinSound;
-        AudioSource.volume = 0.8f;
+        AudioSource.volume = WinSoundVolume;
         AudioSource.Play();
     }
 }

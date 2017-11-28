@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
     [Header("Sounds")]
     [SerializeField]
     private SoundsManager SoundsManager;
-    
+
 
     private GameManager GameManager;
     private EnemyManager EnemyController;
@@ -54,7 +54,6 @@ public class PlayerController : MonoBehaviour
         SpriteRenderer = GetComponent<SpriteRenderer>();
         BossManager = FindObjectOfType<BossManager>();
         GameManager = FindObjectOfType<GameManager>();
-
     }
 
     // Update is called once per frame
@@ -88,7 +87,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             Fire();
-        }        
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -105,7 +104,7 @@ public class PlayerController : MonoBehaviour
         {
             SoundsManager.PlayDoorSound();
             Destroy(collision.gameObject);
-            Key1Canvas.SetActive(true);    
+            Key1Canvas.SetActive(true);
             Destroy(Door1);
         }
 
@@ -113,7 +112,7 @@ public class PlayerController : MonoBehaviour
         {
             SoundsManager.PlayDoorSound();
             Destroy(collision.gameObject);
-            Key2Canvas.SetActive(true);            
+            Key2Canvas.SetActive(true);
             Destroy(Door2);
         }
 
@@ -138,14 +137,14 @@ public class PlayerController : MonoBehaviour
             AttackBoost2Canvas.SetActive(true);
             Destroy(collision.gameObject);
         }
-        
-        if(collision.tag == "BossAggroZone")
+
+        if (collision.tag == "BossAggroZone")
         {
             SoundsManager.PlayDoorSound();
             BossManager.PlayerInRange = true;
         }
     }
-    
+
     private void Fire()
     {
         if (Time.realtimeSinceStartup - LastTimeFire > TimeToFire)
@@ -165,7 +164,7 @@ public class PlayerController : MonoBehaviour
 
         float angle = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
 
-        GunTransform.rotation = Quaternion.Euler(0f, 0f, angle);       
+        GunTransform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 
     float AngleBetweenTwoPoints(Vector3 a, Vector3 b)

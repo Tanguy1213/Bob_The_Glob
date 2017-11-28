@@ -20,10 +20,10 @@ public class BossManager : MonoBehaviour
     private Animator BossAnimationController;
     [SerializeField]
     private GameObject DoorToClose;
-    private SpriteRenderer  BossSpriteRenderer;
+    private SpriteRenderer BossSpriteRenderer;
 
-    private bool BossIsAlive = true;   
-    public bool PlayerInRange = false;   
+    private bool BossIsAlive = true;
+    public bool PlayerInRange = false;
     private float TimeToDestroyBoss = 4.0f;
 
     private bool isBlinking = false;
@@ -61,8 +61,7 @@ public class BossManager : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-    }
+    { }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -75,7 +74,7 @@ public class BossManager : MonoBehaviour
 
             if (BossLife <= 0)
             {
-                BossIsAlive = false;             
+                BossIsAlive = false;
                 gameManager.BrainSpeaking.SetActive(true);
                 DoorToClose.SetActive(false);
                 BossAnimationController.SetBool("isAlive", false);
@@ -115,9 +114,9 @@ public class BossManager : MonoBehaviour
                 }
             }
 
-            if(PlayerInRange == true)
+            if (PlayerInRange == true)
             {
-                DoorToClose.SetActive(true);               
+                DoorToClose.SetActive(true);
                 BossHealthBar.SetActive(true);
             }
         }
