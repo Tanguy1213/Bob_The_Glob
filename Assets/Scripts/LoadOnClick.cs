@@ -21,8 +21,7 @@ public class LoadOnClick : MonoBehaviour
 
     public void LoadFirstLevel(string Level1)
     {
-        SceneManager.LoadScene("Level1");
-        Cursor.visible = true;
+        SceneManager.LoadScene("Level1");        
     }
 
     public void ExitGame()
@@ -55,7 +54,6 @@ public class LoadOnClick : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             ResumeButton();
-
         }
 
         if (IsPauseActive == true)
