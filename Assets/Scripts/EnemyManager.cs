@@ -14,6 +14,8 @@ public class EnemyManager : MonoBehaviour
     [SerializeField]
     public float EnemyLife;
     [SerializeField]
+    private GameObject EnemyLifeBar;
+    [SerializeField]
     private Animator EnemyAnimationController;
     [SerializeField]
     private GameObject DoorToClose;
@@ -115,6 +117,8 @@ public class EnemyManager : MonoBehaviour
         Drop1.SetActive(true);
         Drop2.SetActive(true);
         Drop3.SetActive(true);
+        EnemyLifeBar.SetActive(false);
+        EnemySpriteRenderer.enabled = true;
     }
 
     private IEnumerator Fire()

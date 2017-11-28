@@ -3454,6 +3454,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyDamages: 1
   EnemyLife: 10
+  EnemyLifeBar: {fileID: 1841180367}
   EnemyAnimationController: {fileID: 316937238}
   DoorToClose: {fileID: 1251947157}
   GunTransform: {fileID: 1105243340}
@@ -7460,6 +7461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyDamages: 1
   EnemyLife: 25
+  EnemyLifeBar: {fileID: 1628582621}
   EnemyAnimationController: {fileID: 637575548}
   DoorToClose: {fileID: 1129546710}
   GunTransform: {fileID: 332476227}
@@ -9791,8 +9793,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1627316657}
-        m_MethodName: ExitGame
-        m_Mode: 1
+        m_MethodName: LoadVictoryScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -20718,7 +20720,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 8277f0ab93d0f5345a78673d2d9a905d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4970c48666dd81d458f2c7da43ce9c82, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.8
   m_Pitch: 1

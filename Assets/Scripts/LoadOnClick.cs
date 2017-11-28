@@ -19,9 +19,10 @@ public class LoadOnClick : MonoBehaviour
     private void Start()
     { }
 
-    public void LoadFirstLevel(string FirstLevel)
+    public void LoadFirstLevel(string Level1)
     {
-        SceneManager.LoadScene(FirstLevel);
+        SceneManager.LoadScene("Level1");
+        Cursor.visible = true;
     }
 
     public void ExitGame()
@@ -42,6 +43,11 @@ public class LoadOnClick : MonoBehaviour
     public void ResumeButton()
     {
         IsPauseActive = !IsPauseActive;
+    }
+
+    public void LoadVictoryScene(string VictoryScene)
+    {
+        SceneManager.LoadScene("VictoryScene");
     }
 
     private void Update()
